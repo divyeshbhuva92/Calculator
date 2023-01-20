@@ -21,33 +21,50 @@ Array.from(numberbuttons).forEach((button) => {
 let operationbuttons = document.querySelectorAll(".operation");
 Array.from(operationbuttons).forEach((button) => {
   button.addEventListener("click", (e) => {
-    if (e.target.innerHTML == "+") {
-      previous = current + e.target.innerHTML;
-      //   console.log(e.target.innerHTML);
-      document.querySelector(".previous").innerHTML = previous;
-      current = "";
-      document.querySelector(".current").innerHTML = current;
-    }
-    if (e.target.innerHTML == "-") {
-      previous = current + e.target.innerHTML;
-      //   console.log(e.target.innerHTML);
-      document.querySelector(".previous").innerHTML = previous;
-      current = "";
-      document.querySelector(".current").innerHTML = current;
-    }
-    if (e.target.innerHTML == "x") {
-      previous = current + "*";
-      //   console.log(e.target.innerHTML);
-      document.querySelector(".previous").innerHTML = previous;
-      current = "";
-      document.querySelector(".current").innerHTML = current;
-    }
-    if (e.target.innerHTML == "÷") {
-      previous = current + "/";
-      //   console.log(e.target.innerHTML);
-      document.querySelector(".previous").innerHTML = previous;
-      current = "";
-      document.querySelector(".current").innerHTML = current;
+    if (previous == "") {
+      if (e.target.innerHTML == "+") {
+        previous = current + e.target.innerHTML;
+        //   console.log(e.target.innerHTML);
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+      if (e.target.innerHTML == "-") {
+        previous = current + e.target.innerHTML;
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+      if (e.target.innerHTML == "x") {
+        previous = current + "*";
+
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+      if (e.target.innerHTML == "÷") {
+        previous = current + "/";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+    } else {
+      if (e.target.innerHTML == "x") {
+        previous = eval(previous + current) + "*";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      } else if (e.target.innerHTML == "÷") {
+        previous = eval(previous + current) + "/";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      } else {
+        previous = eval(previous + current) + e.target.innerHTML;
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
     }
     if (e.target.innerHTML == "%") {
       let previous1 = previous.slice(0, -1);
