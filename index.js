@@ -21,41 +21,9 @@ Array.from(numberbuttons).forEach((button) => {
 let operationbuttons = document.querySelectorAll(".operation");
 Array.from(operationbuttons).forEach((button) => {
   button.addEventListener("click", (e) => {
-    if (previous == "") {
-      if (e.target.innerHTML == "+") {
+    if (e.target.innerHTML == "+") {
+      if (previous == "") {
         previous = current + e.target.innerHTML;
-        //   console.log(e.target.innerHTML);
-        document.querySelector(".previous").innerHTML = previous;
-        current = "";
-        document.querySelector(".current").innerHTML = current;
-      }
-      if (e.target.innerHTML == "-") {
-        previous = current + e.target.innerHTML;
-        document.querySelector(".previous").innerHTML = previous;
-        current = "";
-        document.querySelector(".current").innerHTML = current;
-      }
-      if (e.target.innerHTML == "x") {
-        previous = current + "*";
-
-        document.querySelector(".previous").innerHTML = previous;
-        current = "";
-        document.querySelector(".current").innerHTML = current;
-      }
-      if (e.target.innerHTML == "÷") {
-        previous = current + "/";
-        document.querySelector(".previous").innerHTML = previous;
-        current = "";
-        document.querySelector(".current").innerHTML = current;
-      }
-    } else {
-      if (e.target.innerHTML == "x") {
-        previous = eval(previous + current) + "*";
-        document.querySelector(".previous").innerHTML = previous;
-        current = "";
-        document.querySelector(".current").innerHTML = current;
-      } else if (e.target.innerHTML == "÷") {
-        previous = eval(previous + current) + "/";
         document.querySelector(".previous").innerHTML = previous;
         current = "";
         document.querySelector(".current").innerHTML = current;
@@ -66,26 +34,67 @@ Array.from(operationbuttons).forEach((button) => {
         document.querySelector(".current").innerHTML = current;
       }
     }
-    if (e.target.innerHTML == "%") {
-      let previous1 = previous.slice(0, -1);
-      let previous2 = previous[previous.length - 1];
-      let previous3 = current;
-      previous = previous1 + previous2 + previous3 + e.target.innerHTML;
+    if (e.target.innerHTML == "-") {
+      if (previous == "") {
+        previous = current + e.target.innerHTML;
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      } else {
+        previous = eval(previous + current) + e.target.innerHTML;
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+    }
+    if (e.target.innerHTML == "x") {
+      if (previous == "") {
+        previous = current + "*";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      } else {
+        previous = eval(previous + current) + "*";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+    }
+    if (e.target.innerHTML == "÷") {
+      if (previous == "") {
+        previous = current + "/";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      } else {
+        previous = eval(previous + current) + "/";
+        document.querySelector(".previous").innerHTML = previous;
+        current = "";
+        document.querySelector(".current").innerHTML = current;
+      }
+    }
+    // percentage func
+    else if (previous !== "" && e.target.innerHTML == "%") {
+      let part1 = previous.slice(0, -1);
+      let part2 = previous[previous.length - 1];
+      let part3 = current;
+      previous = part1 + part2 + part3 + e.target.innerHTML;
+      console.log(part1 + ", " + part2 + ", " + part3);
+      console.log(previous);
       document.querySelector(".previous").innerHTML = previous;
-      // console.log(previous);
 
-      if (previous2 == "+" || previous2 == "-") {
-        current = eval(previous1 + previous2 + (previous3 * previous1) / 100);
+      if (part2 == "+" || part2 == "-") {
+        current = eval(part1 + part2 + (part3 * part1) / 100);
         document.querySelector(".current").innerHTML = current;
-      } else if (previous2 == "*") {
-        previous = previous1 + "x" + previous3 + e.target.innerHTML;
+      } else if (part2 == "*") {
+        previous = part1 + "x" + part3 + e.target.innerHTML;
         document.querySelector(".previous").innerHTML = previous;
-        current = eval((previous1 * current) / 100);
+        current = eval((part1 * current) / 100);
         document.querySelector(".current").innerHTML = current;
-      } else if (previous2 == "/") {
-        previous = previous1 + "÷" + previous3 + e.target.innerHTML;
+      } else if (part2 == "/") {
+        previous = part1 + "÷" + part3 + e.target.innerHTML;
         document.querySelector(".previous").innerHTML = previous;
-        current = eval((previous1 / current) * 100);
+        current = eval((part1 / current) * 100);
         document.querySelector(".current").innerHTML = current;
       }
     }
