@@ -73,7 +73,7 @@ Array.from(operationbuttons).forEach((button) => {
         document.querySelector(".current").innerHTML = current;
       }
     }
-    // percentage func
+    // percentage function
     else if (previous !== "" && e.target.innerHTML == "%") {
       let part1 = previous.slice(0, -1);
       let part2 = previous[previous.length - 1];
