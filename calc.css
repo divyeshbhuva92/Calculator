@@ -61,7 +61,7 @@ body {
 }
 
 /* animations */
-.bubbles {
+/* .bubbles {
   z-index: -1;
   position: absolute;
   bottom: -120px;
@@ -148,4 +148,4 @@ body {
 }
 .bubbles span.seven:before {
   animation-delay: 6s;
-}
+} */
